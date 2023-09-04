@@ -1,0 +1,75 @@
+---
+import type { z } from "astro:content";
+import type { linkSchema } from "../content/config";
+
+type Body = z.infer<typeof linkSchema>;
+
+interface Props {
+	body: Body;
+	slug: string;
+}
+
+const {
+	slug,
+	body: {
+		title,
+		description,
+		button,
+		backgroundColor,
+		textColor,
+		borderColor,
+		icon,
+		cardSize
+	},
+} = Astro.props;
+
+const Element = button ? "div" : "a";
+
+let colSpan = "col-span-1";
+if (cardSize === "medium") {
+  colSpan = "col-span-2 row-span-2";
+} else if (cardSize === "large") {
+  colSpan = "col-span-3 row-span-3";
+}
+---
+
+<li class={colSpan}>
+	<Element
+		href={slug}
+		class="h-full p-4 lg:py-6 lg:px-8 border-2 border-zinc-400 bg-zinc-100 rounded-2xl flex flex-col"
+		style={{ backgroundColor, color: textColor, borderColor }}
+		transition:name={slug}
+	>
+		{icon && <img src={icon.src} class="w-12 h-12 mb-4" alt={icon.alt} />}
+		<div class="flex-1">
+			<div class="font-semibold text-lg">
+				{title}
+			</div>
+			<div class="font-light text-md italic opacity-60">
+				{description}
+			</div>
+		</div>
+		{
+			button && (
+				<div class="mt-4 lg:mt-8">
+					<a
+						href={button.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="py-2 px-4 rounded-lg font-semibold hover:opacity-80 border-2 border-transparent"
+						style={{
+							backgroundColor: button.backgroundColor,
+							color: button.textColor,
+							borderColor: button.borderColor,
+						}}
+					>
+						<button>
+							{button.text}
+							<span class="ml-1">&rarr;</span>
+						</button>
+					</a>
+				</div>
+			)
+		}
+	</Element>
+</li>

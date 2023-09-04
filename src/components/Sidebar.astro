@@ -1,0 +1,16 @@
+---
+import constants from "../constants.json";
+---
+
+<aside class="px-2" transition:persist>
+  <a href="/">
+    <img
+      class="rounded-full aspect-square max-w-[200px] w-full mb-8"
+      src={constants.image}
+    />
+    <h1 class="text-xl lg:text-3xl font-bold mb-2">{constants.title}</h1>
+  </a>
+  <p class="opacity-60 max-w-xs">
+    {constants.description}
+  </p>
+</aside>

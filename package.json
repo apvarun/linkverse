@@ -1,7 +1,14 @@
 {
   "name": "linkverse",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Varun A P",
+  "description": "A one page link-in-bio page with Astro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apvarun/linkverse"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,6 +17,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.0.5"
+    "@astrojs/tailwind": "^5.0.0",
+    "astro": "^3.0.5",
+    "astro-embed": "^0.5.1",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9"
   }
 }

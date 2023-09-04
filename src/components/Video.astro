@@ -1,0 +1,49 @@
+---
+import type { z } from "astro:content";
+import { YouTube } from "astro-embed";
+
+import type { videoSchema } from "../content/config";
+
+type Body = z.infer<typeof videoSchema>;
+
+interface Props {
+  body: Body;
+  slug: string;
+}
+
+const {
+  slug,
+  body: {
+    videoUrl,
+    caption,
+    backgroundColor,
+    textColor,
+    borderColor,
+    cardSize,
+  },
+} = Astro.props;
+
+let colSpan = "col-span-1";
+if (cardSize === "medium") {
+  colSpan = "col-span-2 row-span-2";
+} else if (cardSize === "large") {
+  colSpan = "col-span-3 row-span-3";
+}
+---
+
+<li class={colSpan}>
+  <div
+    class="h-full overflow-hidden border-2 border-zinc-400 bg-zinc-100 rounded-2xl relative"
+    style={{ backgroundColor, color: textColor, borderColor }}
+    transition:name={slug}
+  >
+    <YouTube
+      id={videoUrl}
+      params="controls=0"
+      class="rounded overflow-hidden mx-auto"
+    />
+    <div class="font-semibold text-lg px-4 py-2 lg:py-4 lg:px-8 text-center">
+      {caption}
+    </div>
+  </div>
+</li>

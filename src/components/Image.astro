@@ -1,0 +1,53 @@
+---
+import type { z } from "astro:content";
+
+import type { imageSchema } from "../content/config";
+
+type Body = z.infer<typeof imageSchema>;
+
+interface Props {
+  body: Body;
+  slug: string;
+}
+
+const {
+  slug,
+  body: {
+    imageUrl,
+    caption,
+    backgroundColor,
+    textColor,
+    borderColor,
+    cardSize,
+    link,
+  },
+} = Astro.props;
+
+let colSpan = "col-span-1";
+if (cardSize === "medium") {
+  colSpan = "col-span-2 row-span-2";
+} else if (cardSize === "large") {
+  colSpan = "col-span-3 row-span-3";
+}
+
+const Element = link ? "a" : "div";
+---
+
+<li class={colSpan}>
+  <Element
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block h-full overflow-hidden border-2 border-zinc-400 bg-zinc-100 rounded-2xl relative"
+    style={{ backgroundColor, borderColor }}
+    transition:name={slug}
+  >
+    <img src={imageUrl} alt={caption} class="w-full h-auto" />
+    <div
+      class="font-semibold text-lg py-1.5 px-2 md:px-4 rounded-lg text-center absolute bottom-2 left-2"
+      style={{ backgroundColor, color: textColor }}
+    >
+      {caption}
+    </div>
+  </Element>
+</li>

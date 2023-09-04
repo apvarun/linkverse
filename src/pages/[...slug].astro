@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import constants from "../constants.json";
+import Link from "../components/Link.astro";
+import Quote from "../components/Quote.astro";
+import Video from "../components/Video.astro";
+import Image from "../components/Image.astro";
+
+export async function getStaticPaths() {
+  const cards = await getCollection("cards");
+  return cards.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<Layout title={constants.title}>
+  <section class="lg:col-span-2 px-4">
+    <ul>
+      {
+        entry.data.type === "link" && (
+          <Link body={entry.data} slug={entry.slug} />
+        )
+      }
+      {
+        entry.data.type === "video" && (
+          <Video body={entry.data} slug={entry.slug} />
+        )
+      }
+      {
+        entry.data.type === "image" && (
+          <Image body={entry.data} slug={entry.slug} />
+        )
+      }
+      {
+        entry.data.type === "quote" && (
+          <Quote body={entry.data} slug={entry.slug} />
+        )
+      }
+    </ul>
+  </section>
+</Layout>
