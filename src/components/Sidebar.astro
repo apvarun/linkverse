@@ -2,15 +2,15 @@
 import constants from "../constants.json";
 ---
 
-<aside class="px-2" transition:persist>
+<aside class="px-2 text-center md:text-left" transition:persist>
   <a href="/">
     <img
-      class="rounded-full aspect-square max-w-[200px] w-full mb-8"
+      class="rounded-full aspect-square max-w-[200px] w-full mb-8 mx-auto md:mx-0"
       src={constants.image}
     />
     <h1 class="text-xl lg:text-3xl font-bold mb-2">{constants.title}</h1>
   </a>
-  <p class="opacity-60 max-w-xs">
+  <p class="opacity-60 max-w-xs mx-auto md:mx-0">
     {constants.description}
   </p>
 </aside>

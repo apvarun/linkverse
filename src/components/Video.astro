@@ -23,12 +23,13 @@ const {
   },
 } = Astro.props;
 
-let colSpan = "col-span-1";
+let colSpan = "md:col-span-1";
 if (cardSize === "medium") {
-  colSpan = "col-span-2 row-span-2";
+  colSpan = "md:col-span-2 md:row-span-2";
 } else if (cardSize === "large") {
-  colSpan = "col-span-3 row-span-3";
+  colSpan = "md:col-span-3 md:row-span-3";
 }
+
 ---
 
 <li class={colSpan}>
